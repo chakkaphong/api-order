@@ -24,11 +24,6 @@ func (h *OrdersHandler) PostOrder(c echo.Context) error {
 
 	h.WorkerPool.Wg.Add(1)
 
-	// Before passing context to worker, check if it's already canceled
-	if ctx.Err() != nil {
-		return c.JSON(http.StatusServiceUnavailable, responses.BadRequest("context canceled before processing"))
-	}
-
 	select {
 	case h.WorkerPool.Queue <- worker.OrderJob{Ctx: ctx, Order: req}:
 		return c.JSON(http.StatusAccepted, responses.Success("order accepted"))
