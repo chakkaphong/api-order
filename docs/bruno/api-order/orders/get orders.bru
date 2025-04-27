@@ -1,0 +1,16 @@
+meta {
+  name: get orders
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{host}}/orders
+  body: none
+  auth: inherit
+}
+
+headers {
+  Page: 1
+  Limit: 10
+}

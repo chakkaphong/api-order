@@ -1,0 +1,21 @@
+meta {
+  name: update order
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{host}}/orders/:id/status
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 48
+}
+
+body:json {
+  {
+    "status": "REJECTED"
+  }
+}
